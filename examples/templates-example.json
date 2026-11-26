@@ -1,0 +1,10 @@
+[
+  {
+    "subject": "You're invited, {{name}}!",
+    "body": "Hi {{name}},\n\nI'd love for you to join us at our event.\n\nDate: ...\nPlace: ...\n\nPlease reply to let me know if you can make it.\n\nBest,\n..."
+  },
+  {
+    "subject": "Join us at the event",
+    "body": "Hello {{name}},\n\nWe're hosting an event and it would be great to see you there.\n\nDetails: ...\n\nJust reply to confirm.\n\nThanks,\n..."
+  }
+]

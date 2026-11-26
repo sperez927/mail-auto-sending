@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invite Mail Sender</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header>
+    <h1>Invite Mail Sender</h1>
+    <div id="account-box" class="account-box">Loading…</div>
+  </header>
+
+  <main>
+    <!-- 1. Recipients -->
+    <section class="card" id="recipients-card">
+      <h2><span class="step">1</span> Recipients</h2>
+      <div class="row">
+        <label class="file-btn">
+          <input type="file" id="file-input" accept=".csv,.xlsx,.xls,.ods,.txt">
+          Choose CSV / Excel file
+        </label>
+        <span id="file-name" class="muted">No file loaded</span>
+        <button id="clear-recipients" class="ghost small" hidden>Clear list</button>
+      </div>
+      <p class="hint">The file needs a column with email addresses (header like <code>email</code>) and ideally one with names (header like <code>name</code>). Any other column can be used in templates too, e.g. <code>{{company}}</code>.</p>
+      <div id="recipient-summary" class="summary" hidden></div>
+      <div class="table-wrap" id="table-wrap" hidden>
+        <table>
+          <thead>
+            <tr><th>#</th><th>Recipient</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="recipient-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. Templates -->
+    <section class="card">
+      <h2><span class="step">2</span> Message templates</h2>
+      <p class="hint">One template is picked at random for each person. Placeholders: <code>{{name}}</code>, <code>{{email}}</code>, or any column header from your file. Templates are saved automatically.</p>
+      <div id="templates"></div>
+      <div class="row">
+        <button id="add-template">+ Add template</button>
+        <span class="spacer"></span>
+        <button id="export-templates" class="ghost small">Export JSON</button>
+        <label class="ghost small file-btn-inline">
+          <input type="file" id="import-templates" accept=".json">
+          Import JSON
+        </label>
+      </div>
+    </section>
+
+    <!-- 3. Settings -->
+    <section class="card">
+      <h2><span class="step">3</span> Sending settings</h2>
+      <div class="grid">
+        <label>Min delay (seconds)
+          <input type="number" id="min-delay" min="0" step="0.5">
+        </label>
+        <label>Max delay (seconds)
+          <input type="number" id="max-delay" min="0" step="0.5">
+        </label>
+      </div>
+      <label class="check"><input type="checkbox" id="dry-run"> Dry run (go through the list and the delays, but don't actually send anything)</label>
+      <p class="hint" style="margin-bottom:0">Send a test first. Type where the test email should go (your own address is fine):</p>
+      <div class="row test-row">
+        <input type="email" id="test-email" placeholder="test recipient, e.g. your own address">
+        <button id="send-test" class="ghost">Send test</button>
+      </div>
+    </section>
+
+    <!-- 4. Run -->
+    <section class="card" id="run-card">
+      <h2><span class="step">4</span> Send</h2>
+      <div class="row">
+        <button id="start" class="primary">Start sending</button>
+        <button id="pause" disabled>Pause</button>
+        <button id="stop" class="danger" disabled>Stop</button>
+        <span class="spacer"></span>
+        <button id="retry-failed" class="ghost small" hidden>Queue failed again</button>
+      </div>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <div id="progress-text" class="progress-text">Nothing queued yet.</div>
+      <div id="status-line" class="status-line"></div>
+      <h3>Log</h3>
+      <ol id="log" class="log"></ol>
+    </section>
+  </main>
+
+  <template id="template-card">
+    <div class="tpl">
+      <div class="tpl-head">
+        <strong class="tpl-title"></strong>
+        <button class="ghost small tpl-delete" title="Delete template">Delete</button>
+      </div>
+      <input type="text" class="tpl-subject" placeholder="Subject">
+      <textarea class="tpl-body" rows="7" placeholder="Hi {{name}},&#10;&#10;..."></textarea>
+    </div>
+  </template>
+
+  <script src="lib/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

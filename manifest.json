@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Invite Mail Sender",
+  "version": "2.0.0",
+  "description": "Send one personal invitation email per row of a CSV/Excel list from your Gmail (via the Gmail API), with random templates and random delays.",
+  "minimum_chrome_version": "116",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxvrTesWyTtMYSdMd7KejD+kUYu9LKJxFWndqCxIVenpVEbENFEy2a08+ccfNtFDJavCef6ZH+T44L/TYb5OBNJyNDX16CNQ2FQNypWeEWAN+HkSwnSVPVfInmEeW1OES5Ex9CpNsO5AneUSHcdmWmc/x6dmghnnMnLtZm8pfWEw2Vmvs8SEOMKmxTMKqjfNHu34p96/cqq8apK1sGbSFGBEr7Sp0xG3y6XI2zLJdH2ucRpsPDPdlMLItOzBEs5cZoTZQtttjS0e9qMNHFx5BsbzOtQWHqMqIpe2accaLFl9PTvw+tl2lUJP/fPiFhgdxvXMCA+tCaLTPK+sAygg9nQIDAQAB",
+  "permissions": [
+    "storage",
+    "identity",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://gmail.googleapis.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "app.html"
+  },
+  "action": {
+    "default_title": "Open Invite Mail Sender"
+  }
+}
